@@ -1,0 +1,16 @@
+Package: PersonalFinances
+Title: Teoten personal finances app
+Version: 0.0.1
+Authors@R: person('Manuel', 'Teodoro_Tenango', email = 'teotenn@proton.me', role = c('cre', 'aut'))
+Description: A toy app focused on finances to learn Golem.
+License: GPL (>= 3)
+Imports: 
+    config (>= 0.3.2),
+    golem (>= 0.4.1),
+    shiny (>= 1.7.4.1)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.1
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
