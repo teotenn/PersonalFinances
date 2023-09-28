@@ -1,0 +1,97 @@
+
+# Calculate time needed
+
+It would be useful to tabulate the monthly increase to plot and show more detailed overview of the growth. We can do that by iterating every month until we reach our goal.
+
+```{r iteration}
+tabulate_growth <- function(df, goal, monthly_income, interest, frequency) {
+  time <- df$Month[nrow(df)]
+  money <- df$Amount[nrow(df)]
+
+  if (money >= goal) {
+    return(df)
+  } else if(time %% frequency == 0) {
+    df <- rbind(df, c(time + 1, calculate_increase(money, monthly_income, interest)))
+    tabulate_growth(df, goal, monthly_income, interest, frequency)
+  } else {
+    df <- rbind(df, c(time + 1, money + monthly_income))
+    tabulate_growth(df, goal, monthly_income, interest, frequency)
+  }
+}
+
+## First we need our calcalute_increase
+calculate_increase <- function(initial_value, increase, interest) {
+  result <- initial_value + increase + ((initial_value + increase) * (interest / 100))
+  return(result)
+}
+
+calculate_increase(6000, 1000, 4)
+calculate_increase(6000, 1000, 2)
+calculate_increase(6000, 2000, 10)
+
+## Now we can test tabulte_growth
+data <- data.frame(Month = 1, Amount = initial_amount)
+data <- tabulate_growth(data, 20000, 1000, 4, 6)
+tabulate_growth(data, 50000, 1000, 4, 12)
+
+```
+
+`tabulate_growth` contains all the info that we need. let's wrap it in a main function to get also the time in Years + Months.
+
+```{r calcTime}
+estimate_time <- function(initial_amount, goal, monthly_income, interest, frequency) {
+  data <- data.frame(Month = 1, Amount = initial_amount)
+  data <- tabulate_growth(data, goal, monthly_income, interest, frequency)
+  tYears <- floor(data$Month[nrow(data)] / 12)
+  tMonths <- data$Month[nrow(data)] - (tYears * 12)
+  estimated_time <- paste(tYears, "years and", tMonths, "months", sep = " ")
+  return(list(data = data, time = estimated_time))
+}
+
+estimate_time(1000, 20000, 1000, 4, 6)
+estimate_time(10000, 200000, 1000, 10, 12)
+```
+ 
+We can then iterate and see if goal matches. As long as we're below, we continue iteration; if it matches, we return the value; if it is above, we adjust it.
+
+A simple example
+
+```{r example}
+initial_amount <- 1000
+int_rate <- 4
+int_freq <- "6 months"
+goal <- 50000
+monthly_income <- 1000
+## Make function for growth_freq using switch
+growth_freq <- 12
+
+estimate_time(initial_amount, goal, monthly_income, int_rate, growth_freq)
+```
+
+# Calculate amount needed
+
+Here we can directly use the formula
+
+```{r amountFormula}
+calculate_monthly_needed <- function(initial_amount, goal, t_years, t_months, interest, frequency) {
+  t_in_months <- t_months + (t_years * 12)
+  int_ratio <- (interest / 100) / frequency
+  results <- ((goal - initial_amount) * int_ratio) /  (((1 + int_ratio)^t_in_months) - 1)
+  return(results)
+}
+
+calculate_monthly_needed(initial_amount, goal, 5, 0, int_rate, growth_freq)
+```
+
+Then I need the master function that returns the value and the table to plot. We can just apply the calculate function and then use the recursive function to do that.
+
+```{r estimateMonthly}
+estimate_monthly <- function(initial_amount, goal, t_years, t_months, interest, frequency) {
+  monthly_needed <- calculate_monthly_needed(initial_amount, goal, t_years, t_months, interest, frequency)
+  data <- data.frame(Month = 1, Amount = initial_amount)
+  data <- tabulate_growth(data, goal, monthly_needed, interest, frequency)
+  return(list(data = data, monthly = monthly_needed))
+}
+
+estimate_monthly(initial_amount, goal, 4, 0, int_rate, growth_freq)
+```
