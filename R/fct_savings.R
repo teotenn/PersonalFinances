@@ -6,6 +6,16 @@
 #'
 #' @noRd
 tabulate_growth <- function(df, goal, monthly_income, interest, frequency) {
+  stopifnot(is.data.frame(df))
+  stopifnot(is.numeric(goal))
+  stopifnot(is.numeric(monthly_income))
+  stopifnot(is.numeric(interest))
+  stopifnot(is.numeric(frequency))
+  stopifnot(goal > 0)
+  stopifnot(monthly_income > 0)
+  stopifnot(interest > 0)
+  stopifnot(frequency > 0)
+  
   time <- df$Month[nrow(df)]
   money <- df$Amount[nrow(df)]
 
@@ -33,6 +43,13 @@ estimate_time <- function(initial_amount, goal, monthly_income, interest, freque
 
 
 calculate_monthly_needed <- function(initial_amount, goal, t_years, t_months, interest, frequency) {
+  stopifnot(is.numeric(initial_amount))
+  stopifnot(is.numeric(goal))
+  stopifnot(is.numeric(t_years))
+  stopifnot(is.numeric(t_months))
+  stopifnot(is.numeric(interest))
+  stopifnot(is.numeric(frequency))
+  
   t_in_months <- t_months + (t_years * 12)
   int_ratio <- (interest / 100) / frequency
   results <- ((goal - initial_amount) * int_ratio) /  (((1 + int_ratio)^t_in_months) - 1)
