@@ -36,8 +36,7 @@ estimate_time <- function(initial_amount, goal, monthly_income, interest, freque
   data <- tabulate_growth(data, goal, monthly_income, interest, frequency)
   tYears <- floor(data$Month[nrow(data)] / 12)
   tMonths <- data$Month[nrow(data)] - (tYears * 12)
-  estimated_time <- paste(tYears, "years and", tMonths, "months", sep = " ")
-  explanatory_text <- glue::glue("You will reach your goal in {estimated_time}.")
+  explanatory_text <- paste(tYears, "years and", tMonths, "months", sep = " ")
   return(list(data = data, text = explanatory_text))
 }
 
@@ -61,6 +60,6 @@ estimate_monthly <- function(initial_amount, goal, t_years, t_months, interest, 
   monthly_needed <- calculate_monthly_needed(initial_amount, goal, t_years, t_months, interest, frequency)
   data <- data.frame(Month = 1, Amount = initial_amount)
   data <- tabulate_growth(data, goal, monthly_needed, interest, frequency)
-  explanatory_text <- glue::glue("You need ${round(monthly_needed, 2)} each month to reach your goal.")
+  explanatory_text <- glue::glue("${round(monthly_needed, 2)} each month")
   return(list(data = data, text = explanatory_text))
 }

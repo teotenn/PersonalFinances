@@ -18,6 +18,7 @@
 ## install.packages('attachment') # if needed.
 attachment::att_amend_desc()
 usethis::use_package("glue", min_version = TRUE)
+usethis::use_package("shinyFeedback", min_version = TRUE)
 
 ## Add modules ----
 ## Create a module infrastructure in R/
@@ -28,6 +29,7 @@ golem::add_module(name = "savings", with_test = TRUE) # Name of the module
 ## Creates fct_* and utils_*
 golem::add_fct("savings", with_test = TRUE)
 golem::add_utils("helpers", with_test = TRUE)
+golem::add_utils("server_helpers", with_test = TRUE)
 
 ## External resources
 ## Creates .js and .css files at inst/app/www
