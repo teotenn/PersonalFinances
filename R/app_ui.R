@@ -10,7 +10,8 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     fluidPage(
-      h1("PersonalFinances"),
+      h1("PersonalFinances", align = "center"),
+      br(),
       mod_savings_ui("savings_1")
     )
   )
@@ -31,6 +32,8 @@ golem_add_external_resources <- function() {
   )
 
   tags$head(
+    tags$link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65", crossorigin="anonymous"),
+    tags$script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js", integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4", crossorigin="anonymous"),
     favicon(),
     bundle_resources(
       path = app_sys("app/www"),

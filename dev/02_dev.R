@@ -35,7 +35,7 @@ golem::add_utils("server_helpers", with_test = TRUE)
 ## Creates .js and .css files at inst/app/www
 golem::add_js_file("script")
 golem::add_js_handler("handlers")
-golem::add_css_file("custom")
+golem::add_css_file("sketchy_bootstrap")
 golem::add_sass_file("custom")
 
 ## Add internal datasets ----
