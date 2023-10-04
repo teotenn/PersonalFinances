@@ -26,7 +26,7 @@ test_that("mod_savings_server works", {
     expect_equal(t_years(), 2)
     expect_equal(int_rate(), 1)   
     session$setInputs(calc_amount = 1)
-    expect_equal(output$results, "You need $148.29 each month to reach your goal.")
+    expect_equal(output$results, "$148.29 each month")
 
     ## scenario as in test-fct_savings.R - "estimate_monthly works"
     ## And testing reactivity notc hanging pre-set values
@@ -37,7 +37,7 @@ test_that("mod_savings_server works", {
     )
 
     session$setInputs(calc_time = 1)
-    expect_equal(output$results, "You will reach your goal in 0 years and 11 months.")
+    expect_equal(output$results, "0 years and 11 months")
   })
 })
 

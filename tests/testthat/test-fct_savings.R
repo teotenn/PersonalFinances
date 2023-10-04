@@ -37,10 +37,9 @@ test_that("calculate_monthly_needed error", {
 test_that("estimate_time works", {
   results <- estimate_time(0, 10000, 1000, 1, 1)
   expect_s3_class(results$data, "data.frame")
-  expect_s3_class(results$text, "character")
   expect_equal(max(results$data$Month), 11)
   expect_equal(round(max(results$data$Amount), 0), 10567)
-  expect_identical(results$text, "You will reach your goal in 0 years and 11 months.")
+  expect_identical(results$text, "0 years and 11 months")
 })
 
 
@@ -50,5 +49,5 @@ test_that("estimate_monthly works", {
   expect_s3_class(results$text, "character")
   expect_equal(max(results$data$Month), 24)
   expect_equal(round(max(results$data$Amount), 0), 5109)
-  expect_identical(results$text, "You need $148.29 each month to reach your goal.")
+  expect_identical(results$text, "$148.29 each month")
 })

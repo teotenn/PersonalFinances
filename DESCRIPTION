@@ -8,6 +8,7 @@ Imports:
     config (>= 0.3.2),
     glue (>= 1.6.2),
     golem (>= 0.4.1),
+    pkgload,
     shiny (>= 1.7.4.1),
     shinyFeedback (>= 0.4.0)
 Encoding: UTF-8
