@@ -12075,3 +12075,15 @@ textarea.form-control-lg {
 .badge.bg-light {
   color: #333;
 }
+
+/* PERSONAL CONFIG */
+.footer-items {
+    background-color: #222;
+    font-size: 12px;
+    color: rgb(180, 180, 180);
+    display: flex;
+    flex-direction: column;
+}
+.footer-item {
+    margin: 0px 0;
+}
