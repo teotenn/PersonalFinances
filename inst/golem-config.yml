@@ -3,8 +3,11 @@ default:
   golem_version: 0.0.1
   app_prod: no
   favicon: ico
+  msg: s
 production:
   app_prod: yes
   favicon: png
+  msg: Live
 dev:
   golem_wd: !expr golem::pkg_path()
+  msg: dev

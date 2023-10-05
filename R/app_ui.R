@@ -11,6 +11,7 @@ app_ui <- function(request) {
     # Your application UI logic
     fluidPage(
       h1("PersonalFinances", align = "center"),
+      h3(get_golem_config("msg")),
       br(),
       mod_savings_ui("savings_1"),
       mod_footer_ui("footer_1")
