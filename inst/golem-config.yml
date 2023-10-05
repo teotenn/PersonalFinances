@@ -2,7 +2,9 @@ default:
   golem_name: PersonalFinances
   golem_version: 0.0.1
   app_prod: no
+  favicon: ico
 production:
   app_prod: yes
+  favicon: png
 dev:
   golem_wd: !expr golem::pkg_path()
